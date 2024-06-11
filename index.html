@@ -82,7 +82,7 @@
             const message = document.getElementById('message').value;
             const statusDiv = document.getElementById('status');
 
-            const apiUrl = `/api/send_sms?number=${encodeURIComponent(phoneNumber)}&message=${encodeURIComponent(message)}`;
+            const apiUrl = `https://api-freesms-kiff.replit.app/send_sms?number=${encodeURIComponent(phoneNumber)}&message=${encodeURIComponent(message)}`;
 
             fetch(apiUrl)
                 .then(response => response.json())
