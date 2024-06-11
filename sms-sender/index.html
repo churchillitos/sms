@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Text Message</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container h1 {
+            margin-bottom: 10px;
+        }
+        .container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .container input, .container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background-color: #3700b3;
+        }
+        .warning {
+            background-color: yellow;
+            color: red;
+            padding: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Free Text Message</h1>
+        <div class="warning">
+            Reminder: Use FREE TEXT MESSAGE for seamless friends communication. For educational purposes only. DO NOT USE FOR SCAM.
+        </div>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" placeholder="Enter phone number">
+        
+        <label for="message">Message:</label>
+        <textarea id="message" rows="5" placeholder="Enter your message"></textarea>
+        
+        <button onclick="sendSMS()">Send Now!</button>
+    </div>
+
+    <script>
+        function sendSMS() {
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const message = document.getElementById('message').value;
+
+            const apiUrl = `https://api-freesms-kiff.replit.app/send_sms?number=${encodeURIComponent(phoneNumber)}&message=${encodeURIComponent(message)}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    alert('Message sent successfully!');
+                })
+                .catch(error => {
+                    console.error('Error sending message:', error);
+                    alert('Failed to send message.');
+                });
+        }
+    </script>
+</body>
+</html>
