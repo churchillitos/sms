@@ -54,6 +54,10 @@
             text-align: center;
             font-weight: bold;
         }
+        .status {
+            margin-top: 10px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -69,23 +73,31 @@
         <textarea id="message" rows="5" placeholder="Enter your message"></textarea>
         
         <button onclick="sendSMS()">Send Now!</button>
+        <div id="status" class="status"></div>
     </div>
 
     <script>
         function sendSMS() {
             const phoneNumber = document.getElementById('phoneNumber').value;
             const message = document.getElementById('message').value;
+            const statusDiv = document.getElementById('status');
 
             const apiUrl = `https://api-freesms-kiff.replit.app/send_sms?number=${encodeURIComponent(phoneNumber)}&message=${encodeURIComponent(message)}`;
 
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    alert('Message sent successfully!');
+                    if (data.success) {
+                        statusDiv.textContent = 'Message sent successfully!';
+                        statusDiv.style.color = 'green';
+                    } else {
+                        throw new Error(data.error || 'Unknown error');
+                    }
                 })
                 .catch(error => {
                     console.error('Error sending message:', error);
-                    alert('Failed to send message.');
+                    statusDiv.textContent = `Failed to send message: ${error.message}`;
+                    statusDiv.style.color = 'red';
                 });
         }
     </script>
