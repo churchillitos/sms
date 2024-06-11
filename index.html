@@ -86,9 +86,18 @@
 
             try {
                 const response = await fetch(apiUrl);
-                const data = await response.json();
+                const text = await response.text();
 
-                console.log('API response:', data);
+                console.log('Raw API response:', text);
+
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    throw new Error('API response is not valid JSON');
+                }
+
+                console.log('Parsed API response:', data);
 
                 if (data.success) {
                     statusDiv.textContent = 'Message sent successfully!';
