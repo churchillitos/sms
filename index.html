@@ -77,39 +77,28 @@
     </div>
 
     <script>
-        async function sendSMS() {
+        function sendSMS() {
             const phoneNumber = document.getElementById('phoneNumber').value;
             const message = document.getElementById('message').value;
             const statusDiv = document.getElementById('status');
 
             const apiUrl = `/api/send_sms?number=${encodeURIComponent(phoneNumber)}&message=${encodeURIComponent(message)}`;
 
-            try {
-                const response = await fetch(apiUrl);
-                const text = await response.text();
-
-                console.log('Raw API response:', text);
-
-                let data;
-                try {
-                    data = JSON.parse(text);
-                } catch (e) {
-                    throw new Error('API response is not valid JSON');
-                }
-
-                console.log('Parsed API response:', data);
-
-                if (data.success) {
-                    statusDiv.textContent = 'Message sent successfully!';
-                    statusDiv.style.color = 'green';
-                } else {
-                    throw new Error(data.error || 'Unknown error');
-                }
-            } catch (error) {
-                console.error('Error sending message:', error);
-                statusDiv.textContent = `Failed to send message: ${error.message}`;
-                statusDiv.style.color = 'red';
-            }
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        statusDiv.textContent = 'Message sent successfully!';
+                        statusDiv.style.color = 'green';
+                    } else {
+                        throw new Error(data.error || 'Unknown error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending message:', error);
+                    statusDiv.textContent = `Failed to send message: ${error.message}`;
+                    statusDiv.style.color = 'red';
+                });
         }
     </script>
 </body>
