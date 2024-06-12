@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 module.exports = async (req, res) => {
     const { number, message } = req.query;
 
-    const apiUrl = `https://api-freesms-kiff.replit.app/send_sms?number=${encodeURIComponent(number)}&message=${encodeURIComponent(message)}`;
+    const apiUrl = `https://api-freesms.replit.app/send_sms?number=${encodeURIComponent(number)}&message=${encodeURIComponent(message)}`;
 
     console.log(`Making request to API URL: ${apiUrl}`);
 
