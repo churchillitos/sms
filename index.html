@@ -6,57 +6,77 @@
     <title>Free Text Message</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            margin: 0;
+            background: linear-gradient(to right, #0062E6, #33AEFF);
+            color: #333;
         }
         .container {
-            background-color: #333;
-            color: white;
+            background-color: #fff;
+            color: #333;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
         }
         .container h1 {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 24px;
         }
         .container label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
         .container input, .container textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
-            border: none;
+            border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box;
         }
         .container button {
             width: 100%;
-            padding: 10px;
-            background-color: #6200ea;
+            padding: 12px;
+            background-color: #0062E6;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
         .container button:hover {
-            background-color: #3700b3;
+            background-color: #004bb5;
         }
         .warning {
             background-color: yellow;
             color: red;
-            padding: 5px;
-            margin-bottom: 10px;
-            text-align: center;
+            padding: 10px;
+            margin-bottom: 20px;
             font-weight: bold;
+            border-radius: 5px;
         }
         .status {
-            margin-top: 10px;
+            margin-top: 20px;
             font-weight: bold;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 14px;
+            animation: fadeIn 2s;
+            color: white;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -75,6 +95,8 @@
         <button onclick="sendSMS()">Send Now!</button>
         <div id="status" class="status"></div>
     </div>
+
+    <footer>© 2024 Churchill. All rights reserved.</footer>
 
     <script>
         function sendSMS() {
